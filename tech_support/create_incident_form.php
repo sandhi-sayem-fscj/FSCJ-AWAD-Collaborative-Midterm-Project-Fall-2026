@@ -2,28 +2,34 @@
 <?php require_once('model/database.php');
 require('incident_create/model/email_db.php'); 
     
-$errorMessage = "";
 $cleanEmail = "";
 $rawEmail = filter_input(INPUT_POST, 'customer-email', FILTER_UNSAFE_RAW);
 if($rawEmail === null || $rawEmail === false) {
-    $errorMessage = "Email is required.";
+    $error = "Email is required.";
 } else {
     $cleanEmail = strtolower(trim($rawEmail));
     if(!filter_var($cleanEmail, FILTER_VALIDATE_EMAIL)) {
-        $errorMessage = "Invalid email format.";
+        $error = "Invalid email format.";
     }
 }
 
-if (!$errorMessage) {
-    try {
-        $userData = find_email($cleanEmail);
-        if (empty($userData)) {
-            $errorMessage = "Customer not found.";
-        }
-    } catch (Exception $e) {
-        $errorMessage = $e->getMessage();
-    }
+if (!$error) {
+    include('errors/error.php');
+    exit();
 }
+try {
+    $userData = find_email($cleanEmail);
+    if (empty($userData)) {
+        $error = "Customer not found.";
+    }
+} catch (Exception $e) {
+    $error = $e->getMessage();
+}
+if ($error) {
+    include('errors/error.php');
+    exit();
+}
+
 
 ?>
 
@@ -34,8 +40,7 @@ if (!$errorMessage) {
         <div>
             <label for="incident-customer">Customer: </label>
             <span style="margin-left: 62px;">
-                <!--?php echo $userData['fullName']; ?> -->
-                 <?php echo $errorMessage ? htmlspecialchars($errorMessage) : htmlspecialchars($userData['fullName']); ?>
+                 <?php echo $error ? htmlspecialchars($error) : htmlspecialchars($userData['fullName']); ?>
             </span>
         </div>
 
