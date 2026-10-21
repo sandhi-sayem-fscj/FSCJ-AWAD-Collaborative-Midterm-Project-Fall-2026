@@ -1,4 +1,31 @@
 <?php $customer = "Joe Smith"; // Temporary value for variable, replace when required ?>
+<?php require_once('model/database.php');
+require('incident_create/model/email_db.php'); 
+    
+$errorMessage = "";
+$cleanEmail = "";
+$rawEmail = filter_input(INPUT_POST, 'customer-email', FILTER_UNSAFE_RAW);
+if($rawEmail === null || $rawEmail === false) {
+    $errorMessage = "Email is required.";
+} else {
+    $cleanEmail = strtolower(trim($rawEmail));
+    if(!filter_var($cleanEmail, FILTER_VALIDATE_EMAIL)) {
+        $errorMessage = "Invalid email format.";
+    }
+}
+
+if (!$errorMessage) {
+    try {
+        $userData = find_email($cleanEmail);
+        if (empty($userData)) {
+            $errorMessage = "Customer not found.";
+        }
+    } catch (Exception $e) {
+        $errorMessage = $e->getMessage();
+    }
+}
+
+?>
 
 <?php include 'view/header.php'; ?>
 <main>
@@ -7,7 +34,8 @@
         <div>
             <label for="incident-customer">Customer: </label>
             <span style="margin-left: 62px;">
-                <?php echo $customer; ?>
+                <!--?php echo $userData['fullName']; ?> -->
+                 <?php echo $errorMessage ? htmlspecialchars($errorMessage) : htmlspecialchars($userData['fullName']); ?>
             </span>
         </div>
 
