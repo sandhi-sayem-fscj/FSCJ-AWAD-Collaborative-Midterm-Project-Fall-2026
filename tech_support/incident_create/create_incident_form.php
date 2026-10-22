@@ -1,46 +1,12 @@
-<?php $customer = "Joe Smith"; // Temporary value for variable, replace when required ?>
-<?php require_once('model/database.php');
-require('incident_create/model/email_db.php'); 
-    
-$cleanEmail = "";
-$rawEmail = filter_input(INPUT_POST, 'customer-email', FILTER_UNSAFE_RAW);
-if($rawEmail === null || $rawEmail === false) {
-    $error = "Email is required.";
-} else {
-    $cleanEmail = strtolower(trim($rawEmail));
-    if(!filter_var($cleanEmail, FILTER_VALIDATE_EMAIL)) {
-        $error = "Invalid email format.";
-    }
-}
-
-if (!$error) {
-    include('errors/error.php');
-    exit();
-}
-try {
-    $userData = find_email($cleanEmail);
-    if (empty($userData)) {
-        $error = "Customer not found.";
-    }
-} catch (Exception $e) {
-    $error = $e->getMessage();
-}
-if ($error) {
-    include('errors/error.php');
-    exit();
-}
-
-
-?>
-
-<?php include 'view/header.php'; ?>
+<?php include '../view/header.php'; ?>
 <main>
     <h2 id="incident-header">Create Incident</h2>
-    <form action="create_incident.php" id="incident-form" method="post">
+    <form action="incident_create/index.php" id="incident-form" method="post">
+        <input type="hidden" name="action" value="create_incident_confirmation">
         <div>
             <label for="incident-customer">Customer: </label>
             <span style="margin-left: 62px;">
-                 <?php echo $error ? htmlspecialchars($error) : htmlspecialchars($userData['fullName']); ?>
+                 <?php echo htmlspecialchars($userData['fullName']); ?>
             </span>
         </div>
 
@@ -48,9 +14,8 @@ if ($error) {
             <label for="incident-product">Product: </label>
             <select name="incident-product" form="incident-form">
                 <?php // Code for displaying options dynamically
-                $options = ['One', 'Two', 'Three'];
-                foreach ($options as $option) {
-                    echo "<option value='$option'>$option</option>";
+                foreach ($products as $product) {
+                    echo "<option value='{$product['productCode']}'>{$product['name']}</option>";
                 }
                 ?>
             </select>  
@@ -95,4 +60,4 @@ if ($error) {
     
 </style>
 
-<?php include 'view/footer.php'; ?>
+<?php include '../view/footer.php'; ?>
