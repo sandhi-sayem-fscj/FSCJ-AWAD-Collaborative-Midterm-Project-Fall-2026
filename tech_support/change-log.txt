@@ -5,3 +5,9 @@ Create basic project structure.
 Created php files.
 Made basic front-end.
 Added basic php for displaying form data.
+
+Ricky Tran
+10/22/2026 at 2:14 PM
+
+Fixed bug where redirection after getting customer via email was hitting to dashboard
+Made boxes on create incident to be aligned 
