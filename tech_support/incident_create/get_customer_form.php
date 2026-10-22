@@ -2,7 +2,7 @@
 <main>
 <h2>Get Customer</h2>
 <p>You must enter the customer's email address to select the customer.</p>
-<form action="incident_create/index.php" method="post" id="get-customer-form">
+<form action="/index.php" method="post" id="get-customer-form">
     <input type="hidden" name="action" value="create_incident_form">
 
     <label>Email:</label>
