@@ -1,16 +1,16 @@
 <?php
 
-function get_products_by_customerId(int $customerId) {
+function get_products_by_customerId($customerId) {
     global $db;
-    $query = 'select distinct 
+    $query = 'SELECT DISTINCT 
                 prd.productCode
                 , prd.name 
-            from tech_support.customers cust
-            inner join tech_support.registrations reg
-                on cust.customerID = reg.customerID
-            inner join tech_support.products prd
-                on reg.productCode = prd.productCode
-            where cust.customerID = :customerId'
+            FROM tech_support.customers cust
+            INNER JOIN tech_support.registrations reg
+                ON cust.customerID = reg.customerID
+            INNER JOIN tech_support.products prd
+                ON reg.productCode = prd.productCode
+            WHERE cust.customerID = :customerId'
             ;
     $statement = $db->prepare($query);
     $statement->bindValue(':customerId', $customerId);

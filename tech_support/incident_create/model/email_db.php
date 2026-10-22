@@ -1,6 +1,6 @@
 <?php
 
-function find_customer_by_email(String $cleanEmail) {
+function find_customer_by_email($cleanEmail) {
     global $db;
     $query = 'SELECT 
                 customerID, 
