@@ -6,7 +6,7 @@
     <input type="hidden" name="action" value="create_incident_form">
 
     <label>Email:</label>
-    <input style="margin-left: 3px;" type="email" name="customer-email">
+    <input style="margin-left: 3px;" type="email" name="customer-email" required>
     <input style="margin-left: 3px;" type="submit" value="Get Customer">
 </form>
 </main>
