@@ -4,9 +4,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/xampp/htdocs/ex_solutions/tech_support_2026-10-19/create_incident_form.php</file>
-            <file>file:/D:/xampp/htdocs/ex_solutions/tech_support_2026-10-19/get_customer_form.php</file>
-            <file>file:/D:/xampp/htdocs/ex_solutions/tech_support_2026-10-19/index.php</file>
+            <file>file:/D:/xampp/htdocs/ex_solutions/FSCJ-AWAD-Collaborative-Midterm-Project-Fall-2026/tech_support/incident_create/create_incident_form.php</file>
+            <file>file:/D:/xampp/htdocs/ex_solutions/FSCJ-AWAD-Collaborative-Midterm-Project-Fall-2026/tech_support/incident_create/get_customer_form.php</file>
+            <file>file:/D:/xampp/htdocs/ex_solutions/FSCJ-AWAD-Collaborative-Midterm-Project-Fall-2026/tech_support/incident_create/create_incident_confirmation.php</file>
+            <file>file:/D:/xampp/htdocs/ex_solutions/FSCJ-AWAD-Collaborative-Midterm-Project-Fall-2026/tech_support/incident_create/index.php</file>
         </group>
     </open-files>
 </project-private>
