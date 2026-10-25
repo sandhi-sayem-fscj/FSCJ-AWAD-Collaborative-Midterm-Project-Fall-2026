@@ -28,10 +28,14 @@ if($action == 'get_customer') {
             }
         }
 
+        // reloads customer form when no matching customer exists based on email (CR)
         $user_data = find_customer_by_email($clean_email);
         if (empty($user_data)) {
-            throw new Exception("Customer not found.");
+            $email_error = "Customer not found.";
+            include('get_customer_form.php');
+            exit();
         }
+
         $user_products = get_products_by_customerId($user_data['customerID']);
         if(empty($user_products)) {
             throw new Exception("No products found for this customer.");
