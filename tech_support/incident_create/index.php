@@ -61,7 +61,7 @@ if($action == 'get_customer') {
 
         add_incident($incident_customer_id, $incident_product_code, $assigned_technician_id, $incident_title, $incident_description);
 
-        header('Location: /tech_support/incident_create/create_incident_confirmation.php');
+        header('Location: create_incident_confirmation.php');
     } catch (Exception $e) {
         $error = $e->getMessage();
         include('../errors/error.php');
